@@ -1,17 +1,16 @@
 package com.auium.test
 
-import com.auium.driver.AuiumDriver
+import com.auium.driver.AuiumPage
+import com.auium.driver.clickOrTap
+import io.appium.java_client.MobileBy
 import org.testng.annotations.Test
-import org.testng.asserts.SoftAssert
 
 class AuiumDriverTest {
 
     @Test
     fun startIOSTest() {
-        val driver = AuiumDriver.buildIOSDriver()
-        val assert = SoftAssert()
-        assert.assertTrue(driver.pageSource.isNotBlank(), "start app failure")
-        assert.assertAll()
+        AuiumPage().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeAny[`name CONTAINS[c] 'Skip'`]")).clickOrTap()
+        AuiumPage().findElement(MobileBy.AccessibilityId("Shopping Bag")).clickOrTap()
     }
 
 }
