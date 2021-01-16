@@ -25,7 +25,7 @@ class AuiumPage {
             element = driver.find(by)
             count++
         }
-        println("查找耗时：${timer.intervalPretty()}")
+        log.info("${if (null == element) "未查找到元素" else "查找到元素"}，查找耗时：${timer.intervalPretty()}")
         return element
     }
 
