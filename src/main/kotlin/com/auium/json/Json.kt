@@ -8,6 +8,6 @@ val objectMapper by lazy { ObjectMapper() }
  * Object to JSON String
  * @return JSON String
  */
-fun String.toJsonString(): String {
+fun Any.jsonString(): String {
     return objectMapper.writeValueAsString(this)
 }
