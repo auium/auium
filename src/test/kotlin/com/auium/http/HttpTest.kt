@@ -1,5 +1,7 @@
 package com.auium.http
 
+import com.auium.driver.DefaultInfo
+import com.auium.json.toObject
 import kotlin.test.Test
 
 class HttpTest {
@@ -25,6 +27,13 @@ class HttpTest {
         val param = mapOf("name" to "zhangsan", "age" to 18)
         val result = url.httpPostJson(param)
         println(result)
+    }
+
+    @Test
+    fun jsonToBeanTest() {
+        val result = "http://localhost:8100".httpGet()
+        val info: DefaultInfo = result.body.toObject()
+        println(info.value?.error)
     }
 
 }
