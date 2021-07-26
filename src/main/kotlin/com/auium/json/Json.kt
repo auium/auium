@@ -33,7 +33,20 @@ inline fun <reified T> String.toObject(): T {
 }
 
 /**
+ * String to Java Bean Specify TypeReference
+ * @return Object
+ */
+fun <T> String.toObject(typeReference: TypeReference<T>): T {
+    return try {
+        objectMapper.readValue(this, typeReference)
+    } catch (ex: Exception) {
+        throw RuntimeException(ex)
+    }
+}
+
+/**
  * Get Json Node
+ * @return JsonNode
  */
 fun String.jsonNode(): JsonNode? {
     return try {
@@ -43,19 +56,19 @@ fun String.jsonNode(): JsonNode? {
     }
 }
 
+/**
+ * String to Map<String, Any>
+ * @return Map
+ */
 fun String.toMap(): Map<String, Any?> {
     val typeReference: TypeReference<Map<String, Any?>> = object : TypeReference<Map<String, Any?>>() {}
-    return toObject(this, typeReference)
+    return this.toObject(typeReference)
 }
 
-fun <T> toObject(str: String, typeReference: TypeReference<T>): T {
-    return try {
-        objectMapper.readValue(str, typeReference)
-    } catch (ex: Exception) {
-        throw RuntimeException(ex)
-    }
-}
-
+/**
+ * get Class Type
+ * @return JavaType
+ */
 fun getType(clazz: Class<*>, subClazz: Class<*>): JavaType? {
     return objectMapper.typeFactory.constructCollectionLikeType(clazz, subClazz)
 }
