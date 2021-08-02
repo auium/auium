@@ -4,16 +4,19 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.PropertyAccessor
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.*
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
 val objectMapper by lazy { buildMapper() }
 
 private fun buildMapper(): ObjectMapper {
-    return ObjectMapper()
-        .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+    val jacksonObjectMapper = jacksonObjectMapper()
+    jacksonObjectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+    jacksonObjectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
         .enable(SerializationFeature.INDENT_OUTPUT)
         .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
         .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
         .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+    return jacksonObjectMapper
 }
 
 /**
@@ -21,7 +24,7 @@ private fun buildMapper(): ObjectMapper {
  * @return JSON String
  */
 fun Any.jsonString(): String {
-    return objectMapper.writeValueAsString(this)
+    return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(this)
 }
 
 /**
