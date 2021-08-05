@@ -1,13 +1,13 @@
 package com.auium.json
 
-import com.auium.driver.DefaultInfo
+import com.auium.domain.WdaError
 import kotlin.test.Test
 
 class JsonTest {
 
     @Test
     fun objectToJsonTest() {
-        val info = DefaultInfo()
+        val info = WdaError()
         println(info.jsonString())
     }
 

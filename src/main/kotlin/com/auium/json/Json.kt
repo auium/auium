@@ -59,6 +59,10 @@ fun String.jsonNode(): JsonNode? {
     }
 }
 
+inline fun <reified T> JsonNode.toObject(): T {
+    return objectMapper.convertValue(this, T::class.java)
+}
+
 /**
  * String to Map<String, Any>
  * @return Map

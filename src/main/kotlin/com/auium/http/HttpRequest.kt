@@ -1,5 +1,6 @@
 package com.auium.http
 
+import okhttp3.FormBody
 import okhttp3.Headers
 import okhttp3.Request
 
@@ -12,6 +13,15 @@ val okhttp by lazy { UnsafeOkHttpClient.getUnsafeOkHttpClient() }
  */
 fun String.httpGet(headers: Map<String, String> = mapOf()): HttpResult {
     val request = Request.Builder().url(this).get().headers(buildHeaders(headers)).build()
+    return request.execute()
+}
+
+/**
+ * Execute Http Post request
+ * @return HttpResult
+ */
+fun String.httpPost():HttpResult {
+    val request = Request.Builder().url(this).post(FormBody.Builder().build()).build()
     return request.execute()
 }
 

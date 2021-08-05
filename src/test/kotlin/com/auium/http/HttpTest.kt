@@ -1,7 +1,7 @@
 package com.auium.http
 
-import com.auium.driver.DefaultInfo
 import com.auium.json.toObject
+import java.awt.SystemColor.info
 import kotlin.test.Test
 
 class HttpTest {
@@ -31,9 +31,6 @@ class HttpTest {
 
     @Test
     fun jsonToBeanTest() {
-        val result = "http://localhost:8100".httpGet()
-        val info: DefaultInfo = result.body.toObject()
-        println(info.value?.error)
     }
 
 }
