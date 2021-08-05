@@ -1,6 +1,6 @@
 package com.auium.http
 
-import com.auium.json.jsonString
+import com.auium.json.toJsonString
 import okhttp3.FormBody
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
@@ -35,6 +35,6 @@ fun Request.Builder.jsonBody(json: String): Request.Builder {
  * @return Request.Builder
  */
 fun Request.Builder.jsonBody(obj: Any): Request.Builder {
-    val body = obj.jsonString().toRequestBody(jsonMediaType)
+    val body = obj.toJsonString().toRequestBody(jsonMediaType)
     return post(body)
 }

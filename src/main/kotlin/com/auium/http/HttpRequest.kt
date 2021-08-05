@@ -1,8 +1,8 @@
 package com.auium.http
 
-import okhttp3.FormBody
 import okhttp3.Headers
 import okhttp3.Request
+import okhttp3.internal.EMPTY_REQUEST
 
 val okhttp by lazy { UnsafeOkHttpClient.getUnsafeOkHttpClient() }
 
@@ -21,7 +21,7 @@ fun String.httpGet(headers: Map<String, String> = mapOf()): HttpResult {
  * @return HttpResult
  */
 fun String.httpPost():HttpResult {
-    val request = Request.Builder().url(this).post(FormBody.Builder().build()).build()
+    val request = Request.Builder().url(this).post(EMPTY_REQUEST).build()
     return request.execute()
 }
 
@@ -55,6 +55,11 @@ fun String.httpPostJson(body: Any, headers: Map<String, String> = mapOf()): Http
  */
 fun String.httpPostJson(body: String, headers: Map<String, String> = mapOf()): HttpResult {
     val request = Request.Builder().url(this).jsonBody(body).headers(buildHeaders(headers)).build()
+    return request.execute()
+}
+
+fun String.httpDelete(headers: Map<String, String> = mapOf()): HttpResult {
+    val request = Request.Builder().url(this).delete().headers(buildHeaders(headers)).build()
     return request.execute()
 }
 

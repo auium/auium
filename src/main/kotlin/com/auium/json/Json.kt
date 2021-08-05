@@ -23,16 +23,31 @@ private fun buildMapper(): ObjectMapper {
  * Object to JSON String
  * @return JSON String
  */
-fun Any.jsonString(): String {
-    return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(this)
+fun Any.toJsonString(): String {
+    try {
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(this)
+    } catch (ex: Exception) {
+        throw RuntimeException(ex.message, ex)
+    }
 }
 
 /**
  * String to Java Bean
  * @return Object
  */
-inline fun <reified T> String.toObject(): T {
-    return objectMapper.readValue(this, T::class.java)
+inline fun <reified T> String?.toObject(): T {
+    try {
+        if (this.isNullOrBlank()) {
+            return T::class.java.getDeclaredConstructor().newInstance()
+        }
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
+    try {
+        return objectMapper.readValue(this, T::class.java)
+    } catch (ex: Exception) {
+        throw RuntimeException(ex.message, ex)
+    }
 }
 
 /**

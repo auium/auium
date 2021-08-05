@@ -8,7 +8,7 @@ class JsonTest {
     @Test
     fun objectToJsonTest() {
         val info = WdaError()
-        println(info.jsonString())
+        println(info.toJsonString())
     }
 
 }
