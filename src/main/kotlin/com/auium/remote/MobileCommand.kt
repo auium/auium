@@ -11,6 +11,10 @@ object MobileCommand {
     const val NEW_SESSION = "newSession"
     const val STATUS = "status"
     const val GET_PAGE_SOURCE = "getPageSource"
+    const val HOME = "home"
+    const val LOCKED = "locked"
+    const val UNLOCK = "unlock"
+    const val LAUNCH = "launchApp"
 
     init {
         commands[DISMISS_ALERT] = post("/session/:sessionId/alert/dismiss")
@@ -19,6 +23,10 @@ object MobileCommand {
         commands[NEW_SESSION] = post("/session")
         commands[STATUS] = get("/status")
         commands[GET_PAGE_SOURCE] = post("/source")
+        commands[HOME] = post("/wda/homescreen")
+        commands[LOCKED] = get("/wda/locked")
+        commands[UNLOCK] = post("/wda/unlock")
+        commands[LAUNCH] = post("/session/:sessionId/wda/apps/launch")
     }
 
     fun get(url: String): CommandInfo {

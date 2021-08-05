@@ -54,12 +54,6 @@ class Response {
     }
 
     override fun toString(): String {
-        return ToStringBuilder(this)
-            .append("value", value)
-            .append("sessionId", sessionId)
-            .append("id", id)
-            .append("status", status)
-            .append("state", state)
-            .toString()
+        return ToStringBuilder.reflectionToString(this)
     }
 }

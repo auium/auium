@@ -10,7 +10,7 @@ import com.auium.logger.Logger
 import com.auium.remote.http.HttpMethod
 import java.util.concurrent.locks.ReentrantLock
 
-class CommandExecutionHelper(val driverUrl: String) {
+open class CommandExecutionHelper(private val driverUrl: String) {
 
     private val lock = ReentrantLock()
 
@@ -19,11 +19,11 @@ class CommandExecutionHelper(val driverUrl: String) {
     }
 
     fun execute(command: String, wildcards: MutableMap<Wildcard, String>): Response {
-        return execute(command, wildcards, mutableMapOf())
+        return execute(command, wildcards, mapOf())
     }
 
-    fun execute(command: String, wildcards: MutableMap<Wildcard, String>, parameters: MutableMap<String, Any>): Response {
-        val commandInfo =  MobileCommand.getCommand(command) ?: throw WebDriverAgentException("找不到命令：$command")
+    fun execute(command: String, wildcards: MutableMap<Wildcard, String>, parameters: Map<String, Any>): Response {
+        val commandInfo = MobileCommand.getCommand(command) ?: throw WebDriverAgentException("找不到命令：$command")
         var url = "$driverUrl${commandInfo.url}"
         Logger.debug("Execute command: $command with parameters: $parameters and url: $url")
         Wildcard.values().forEach { wildcard ->
@@ -32,7 +32,6 @@ class CommandExecutionHelper(val driverUrl: String) {
                 url = url.replace(wildcard.key, value)
             }
         }
-
         var httpResponse: HttpResult? = null
         try {
             lock.lock()

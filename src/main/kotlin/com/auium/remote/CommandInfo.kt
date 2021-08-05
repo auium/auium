@@ -16,10 +16,7 @@ class CommandInfo(val url: String, method: HttpMethod) {
     }
 
     override fun toString(): String {
-        return ToStringBuilder(this)
-            .append("url", url)
-            .append("method", method)
-            .toString()
+        return ToStringBuilder.reflectionToString(this)
     }
 
 }
