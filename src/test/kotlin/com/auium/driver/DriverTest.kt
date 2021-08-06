@@ -13,7 +13,7 @@ class DriverTest {
 
     @Test
     fun driverBuildTest() {
-        val driver = Driver()
+        val driver = Driver(url)
         driver.locked()
         driver.unlock()
         driver.status()
@@ -21,20 +21,20 @@ class DriverTest {
 
     @Test
     fun sessionTest() {
-        val driver = Driver()
+        val driver = Driver(url)
         driver.session(bundleId, "zh-tw")
         driver.home()
     }
 
     @Test
     fun launchAppTest() {
-        val driver = Driver()
+        val driver = Driver(url)
         driver.launch(bundleId, "zh")
     }
 
     @Test
     fun homeTest() {
-        val driver = Driver()
+        val driver = Driver(url)
         driver.home()
     }
 
