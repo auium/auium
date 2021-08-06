@@ -1,5 +1,6 @@
 package com.auium.driver
 
+import com.auium.element.Selector
 import com.auium.remote.CommandExecutionHelper
 import com.auium.remote.DriverStatus
 import com.auium.remote.MobileCommand
@@ -13,7 +14,6 @@ class DriverTest {
 
     @Test
     fun driverBuildTest() {
-        val driver = Driver(url)
         driver.locked()
         driver.unlock()
         driver.status()
@@ -21,27 +21,38 @@ class DriverTest {
 
     @Test
     fun sessionTest() {
-        val driver = Driver(url)
         driver.session(bundleId, "zh-tw")
         driver.home()
     }
 
     @Test
     fun launchAppTest() {
-        val driver = Driver(url)
-        driver.launch(bundleId, "zh")
+        driver.launch(bundleId, "zh-hk")
+    }
+
+    @Test
+    fun terminateTest() {
+        driver.terminate(bundleId)
     }
 
     @Test
     fun homeTest() {
-        val driver = Driver(url)
         driver.session(bundleId)
         driver.close()
     }
 
     @Test
+    fun findElementTest() {
+        val el = driver.findElement(Selector.ClassChain("**/XCUIElementTypeImage[`name == \"basic_cart-24\"`]"))
+        println(el?.rect())
+        println(el?.size())
+        println(el?.location())
+        el?.tap()
+    }
+
+    @Test
     fun requestTest() {
-        val response = CommandExecutionHelper(url).execute(MobileCommand.STATUS)
+        val response = CommandExecutionHelper().execute(MobileCommand.STATUS)
         val status = response.convert<DriverStatus>()
         println(status)
     }

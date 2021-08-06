@@ -4,7 +4,7 @@ import com.auium.remote.http.HttpMethod
 
 object MobileCommand {
 
-    val commands = mutableMapOf<String, CommandInfo>()
+    private val commands = mutableMapOf<String, CommandInfo>()
     const val DISMISS_ALERT = "dismissAlert"
     const val ACCEPT_ALERT = "acceptAlert"
     const val GET_ALERT_TEXT = "getAlertText"
@@ -12,10 +12,15 @@ object MobileCommand {
     const val STATUS = "status"
     const val GET_PAGE_SOURCE = "getPageSource"
     const val HOME = "home"
+    const val TAP = "tap"
     const val LOCKED = "locked"
     const val UNLOCK = "unlock"
     const val LAUNCH = "launchApp"
     const val CLOSE = "closeApp"
+    const val TERMINATE = "terminateApp"
+    const val FIND_ELEMENT = "findElement"
+    const val FIND_ELEMENTS = "findElements"
+    const val GET_ELEMENT_RECT = "getElementRect"
 
     init {
         commands[DISMISS_ALERT] = post("/session/:sessionId/alert/dismiss")
@@ -29,6 +34,11 @@ object MobileCommand {
         commands[UNLOCK] = post("/wda/unlock")
         commands[LAUNCH] = post("/session/:sessionId/wda/apps/launch")
         commands[CLOSE] = delete("/session/:sessionId")
+        commands[TERMINATE] = post("/session/:sessionId/wda/apps/terminate")
+        commands[FIND_ELEMENT] = post("/session/:sessionId/element")
+        commands[FIND_ELEMENTS] = post("/session/:sessionId/elements")
+        commands[GET_ELEMENT_RECT] = get("/session/:sessionId/element/:uuid/rect")
+        commands[TAP] = post("/session/:sessionId/wda/tap/0")
     }
 
     fun get(url: String): CommandInfo {
@@ -44,7 +54,7 @@ object MobileCommand {
     }
 
     fun getCommand(command: String): CommandInfo? {
-        return commands.get(command)
+        return commands[command]
     }
 
 }

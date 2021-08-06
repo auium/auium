@@ -1,6 +1,5 @@
 package com.auium.remote
 
-import com.auium.exceptions.WebDriverAgentException
 import com.auium.http.HttpResult
 import com.auium.http.httpDelete
 import com.auium.http.httpGet
@@ -10,7 +9,7 @@ import com.auium.logger.Logger
 import com.auium.remote.http.HttpMethod
 import java.util.concurrent.locks.ReentrantLock
 
-open class CommandExecutionHelper(private val driverUrl: String) {
+open class CommandExecutionHelper {
 
     private val lock = ReentrantLock()
 
@@ -19,12 +18,12 @@ open class CommandExecutionHelper(private val driverUrl: String) {
     }
 
     fun execute(command: String, wildcards: MutableMap<Wildcard, String>): Response {
-        return execute(command, wildcards, mapOf())
+        return execute(command, wildcards, mutableMapOf<String, String>())
     }
 
-    fun execute(command: String, wildcards: MutableMap<Wildcard, String>, parameters: Map<String, Any>): Response {
+    fun execute(command: String, wildcards: MutableMap<Wildcard, String>, parameters: Any): Response {
         val commandInfo = MobileCommand.getCommand(command) ?: throw WebDriverAgentException("找不到命令：$command")
-        var url = "$driverUrl${commandInfo.url}"
+        var url = "$webDriverAgentUrl${commandInfo.url}"
         Wildcard.values().forEach { wildcard ->
             val value = wildcards[wildcard]
             if (value != null) {
