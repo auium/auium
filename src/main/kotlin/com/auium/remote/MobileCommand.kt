@@ -15,6 +15,7 @@ object MobileCommand {
     const val LOCKED = "locked"
     const val UNLOCK = "unlock"
     const val LAUNCH = "launchApp"
+    const val CLOSE = "closeApp"
 
     init {
         commands[DISMISS_ALERT] = post("/session/:sessionId/alert/dismiss")
@@ -27,6 +28,7 @@ object MobileCommand {
         commands[LOCKED] = get("/wda/locked")
         commands[UNLOCK] = post("/wda/unlock")
         commands[LAUNCH] = post("/session/:sessionId/wda/apps/launch")
+        commands[CLOSE] = delete("/session/:sessionId")
     }
 
     fun get(url: String): CommandInfo {

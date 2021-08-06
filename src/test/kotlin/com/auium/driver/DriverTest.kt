@@ -35,7 +35,8 @@ class DriverTest {
     @Test
     fun homeTest() {
         val driver = Driver(url)
-        driver.home()
+        driver.session(bundleId)
+        driver.close()
     }
 
     @Test

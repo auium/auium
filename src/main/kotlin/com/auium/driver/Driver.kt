@@ -45,6 +45,10 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
         execute(MobileCommand.HOME)
     }
 
+    fun close() {
+        execute(MobileCommand.CLOSE, wildcards)
+    }
+
     /**
      * 创建会话
      * @param bundleId 应用编号

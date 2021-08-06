@@ -25,13 +25,13 @@ open class CommandExecutionHelper(private val driverUrl: String) {
     fun execute(command: String, wildcards: MutableMap<Wildcard, String>, parameters: Map<String, Any>): Response {
         val commandInfo = MobileCommand.getCommand(command) ?: throw WebDriverAgentException("找不到命令：$command")
         var url = "$driverUrl${commandInfo.url}"
-        Logger.debug("Execute command: $command with parameters: $parameters and url: $url")
         Wildcard.values().forEach { wildcard ->
             val value = wildcards[wildcard]
             if (value != null) {
                 url = url.replace(wildcard.key, value)
             }
         }
+        Logger.debug("Execute command: $command with parameters: $parameters and url: $url")
         var httpResponse: HttpResult? = null
         try {
             lock.lock()
