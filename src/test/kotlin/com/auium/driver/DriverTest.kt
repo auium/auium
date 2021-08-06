@@ -11,6 +11,7 @@ class DriverTest {
 
     private val url = "http://localhost:8100"
     private val bundleId: String = "com.apple.TestFlight"
+    private val driver = Driver(url)
 
     @Test
     fun driverBuildTest() {
