@@ -19,7 +19,7 @@ mvn clean install -DskipTests
 <dependency>
     <groupId>com.auium</groupId>
     <artifactId>auium</artifactId>
-    <version>${auium.version}</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
