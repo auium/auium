@@ -22,7 +22,7 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
     fun locked(): Boolean {
         val response = execute(MobileCommand.LOCKED)
         getSession(response)
-        return response.convert()
+        return response.convert() ?: false
     }
 
     /**
@@ -41,7 +41,7 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
         val response = execute(MobileCommand.STATUS)
         getSession(response)
         val status = response.convert<DriverStatus>()
-        if (!status.ready) throw WebDriverAgentException("WebDriverAgent状态为[ready]")
+        if (status?.ready == false) throw WebDriverAgentException("WebDriverAgent状态为[ready]")
     }
 
     /**
@@ -121,7 +121,7 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
         )
         val response = execute(MobileCommand.NEW_SESSION, mutableMapOf(), payload)
         val capabilitiesResult = response.convert<CapabilitiesResult>()
-        if (capabilitiesResult.sessionId.isNotBlank()) {
+        if (capabilitiesResult?.sessionId?.isNotBlank() == true) {
             this.sessionId = capabilitiesResult.sessionId
             wildcards[Wildcard.SESSION_ID] = capabilitiesResult.sessionId
         } else throw WebDriverAgentException("创建Session失败: $response")

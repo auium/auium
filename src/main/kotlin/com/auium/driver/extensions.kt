@@ -21,7 +21,7 @@ val wildcards: ConcurrentMap<Wildcard, String> by lazy { ConcurrentHashMap() }
  */
 fun Driver.findElement(selector: Selector): Element? {
     val element = execute(MobileCommand.FIND_ELEMENT, wildcards, selector.toRequest()).convert<Element>()
-    return if (element.elementId.isNullOrBlank()) null else element
+    return if (element?.elementId.isNullOrBlank()) null else element
 }
 
 /**

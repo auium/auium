@@ -36,7 +36,7 @@ class Element : IElement, CommandExecutionHelper() {
         wildcards[Wildcard.ELEMENT_ID] = elementId
         val rectangle = execute(MobileCommand.GET_ELEMENT_RECT, wildcards).convert<Rectangle>()
         this.rect = rectangle
-        return rectangle
+        return rectangle ?: Rectangle()
     }
 
     override fun location(): Point {
