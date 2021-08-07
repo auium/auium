@@ -21,6 +21,9 @@ object MobileCommand {
     const val FIND_ELEMENT = "findElement"
     const val FIND_ELEMENTS = "findElements"
     const val GET_ELEMENT_RECT = "getElementRect"
+    const val INPUT = "input"
+    const val SEND = "sendKeys"
+    const val CLEAR = "clear"
 
     init {
         commands[DISMISS_ALERT] = post("/session/:sessionId/alert/dismiss")
@@ -28,7 +31,7 @@ object MobileCommand {
         commands[GET_ALERT_TEXT] = get("/session/:sessionId/alert/text")
         commands[NEW_SESSION] = post("/session")
         commands[STATUS] = get("/status")
-        commands[GET_PAGE_SOURCE] = post("/source")
+        commands[GET_PAGE_SOURCE] = get("/source")
         commands[HOME] = post("/wda/homescreen")
         commands[LOCKED] = get("/wda/locked")
         commands[UNLOCK] = post("/wda/unlock")
@@ -37,8 +40,11 @@ object MobileCommand {
         commands[TERMINATE] = post("/session/:sessionId/wda/apps/terminate")
         commands[FIND_ELEMENT] = post("/session/:sessionId/element")
         commands[FIND_ELEMENTS] = post("/session/:sessionId/elements")
-        commands[GET_ELEMENT_RECT] = get("/session/:sessionId/element/:uuid/rect")
         commands[TAP] = post("/session/:sessionId/wda/tap/0")
+        commands[INPUT] = post("/session/:sessionId/wda/keys")
+        commands[GET_ELEMENT_RECT] = get("/session/:sessionId/element/:uuid/rect")
+        commands[SEND] = post("/session/:sessionId/element/:uuid/value")
+        commands[CLEAR] = post("/session/:sessionId/element/:uuid/clear")
     }
 
     fun get(url: String): CommandInfo {

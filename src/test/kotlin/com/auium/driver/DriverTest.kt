@@ -49,6 +49,20 @@ class DriverTest {
         println(el?.size())
         println(el?.location())
         el?.tap()
+        Thread.sleep(1000)
+        driver.findElement(Selector.ClassChain("**/XCUIElementTypeButton[`name == 'Wishlist'`]"))?.tap()
+    }
+
+    @Test
+    fun sendKeysTest() {
+        val input = driver.findElement(Selector.ClassChain("**/XCUIElementTypeTextField"))
+        input?.clear()
+        input?.sendKeys("YU")
+    }
+
+    @Test
+    fun getSourceTest() {
+        println(driver.source())
     }
 
     @Test

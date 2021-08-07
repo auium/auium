@@ -23,7 +23,7 @@ class Element : IElement, CommandExecutionHelper() {
     }
 
     override fun text(): String {
-        wildcards[Wildcard.ELEMENT_UI_ID] = elementId
+        wildcards[Wildcard.ELEMENT_ID] = elementId
         return ""
     }
 
@@ -33,7 +33,7 @@ class Element : IElement, CommandExecutionHelper() {
     }
 
     override fun rect(): Rectangle {
-        wildcards[Wildcard.ELEMENT_UI_ID] = elementId
+        wildcards[Wildcard.ELEMENT_ID] = elementId
         val rectangle = execute(MobileCommand.GET_ELEMENT_RECT, wildcards).convert<Rectangle>()
         this.rect = rectangle
         return rectangle
@@ -44,6 +44,16 @@ class Element : IElement, CommandExecutionHelper() {
         val x = rect?.x ?: 0
         val y = rect?.y ?: 0
         return Point(x, y)
+    }
+
+    override fun clear() {
+        wildcards[Wildcard.ELEMENT_ID] = elementId
+        execute(MobileCommand.CLEAR, wildcards)
+    }
+
+    override fun sendKeys(keys: String) {
+        wildcards[Wildcard.ELEMENT_ID] = elementId
+        execute(MobileCommand.SEND, wildcards, mapOf("value" to keys.splitToSequence("")))
     }
 
     override fun toString(): String {
