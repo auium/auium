@@ -27,5 +27,6 @@ mvn clean install -DskipTests
 ```kotlin
 val driver = Driver("http://localhost:8100")
 driver.session("your app bundleId")
+driver.findElement(Selector.ClassChain("**/XCUIElementTypeButton[`name == 'Me'`]"))?.tap()
 driver.close()
 ```
