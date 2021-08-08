@@ -7,7 +7,7 @@ mvn命令
 mvn clean install -DskipTests
 ```
 
-项目内当mvnw命令
+项目内的mvnw(Windows `mvnw.cmd`)命令
 ```shell
 ./mvnw clean install -DskipTests
 ```
