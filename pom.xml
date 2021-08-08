@@ -18,7 +18,8 @@
         <hutool.version>5.7.7</hutool.version>
         <testng.version>7.4.0</testng.version>
         <snakeyaml.version>1.29</snakeyaml.version>
-        <slf4j.version>1.7.30</slf4j.version>
+        <kotlin-logging.version>2.0.10</kotlin-logging.version>
+        <slf4j.version>1.7.32</slf4j.version>
         <log4j.version>2.14.1</log4j.version>
         <kotlin.version>1.5.21</kotlin.version>
         <java.version>11</java.version>
@@ -54,6 +55,20 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging-jvm</artifactId>
+            <version>${kotlin-logging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -153,6 +168,11 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.yaml</groupId>

@@ -1,16 +1,18 @@
 package com.auium.driver
 
-import com.auium.logger.Logger
 import com.auium.remote.*
+import mu.KotlinLogging
 import java.awt.Point
 
 class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelper() {
 
+    private val logger = KotlinLogging.logger {}
     var sessionId: String = ""
     val empty = mutableMapOf<String, String>()
 
     init {
         webDriverAgentUrl = driverUrl
+        logger.info("初始化驱动：$webDriverAgentUrl")
         if (locked()) unlock()
         status()
     }
@@ -31,7 +33,7 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
     fun unlock() {
         val response = execute(MobileCommand.UNLOCK)
         if (response.status == 500) throw WebDriverAgentException("解锁设备失败!")
-        Logger.debug(response)
+        logger.info("解锁屏幕")
     }
 
     /**

@@ -5,12 +5,13 @@ import com.auium.http.httpDelete
 import com.auium.http.httpGet
 import com.auium.http.httpPostJson
 import com.auium.json.toObject
-import com.auium.logger.Logger
 import com.auium.remote.http.HttpMethod
+import mu.KotlinLogging
 import java.util.concurrent.locks.ReentrantLock
 
 open class CommandExecutionHelper {
 
+    private val logger = KotlinLogging.logger {}
     private val lock = ReentrantLock()
 
     fun execute(command: String): Response {
@@ -30,7 +31,7 @@ open class CommandExecutionHelper {
                 url = url.replace(wildcard.key, value)
             }
         }
-        Logger.debug("Execute command: $command with parameters: $parameters and url: $url")
+        logger.debug("Execute command: $command with parameters: $parameters and url: $url")
         var httpResponse: HttpResult? = null
         try {
             lock.lock()
@@ -46,7 +47,7 @@ open class CommandExecutionHelper {
                 }
             }
         } catch (ex: Exception) {
-            Logger.error("请求WebDriverAgent异常 ${ex.message}")
+            logger.error("请求WebDriverAgent异常 ${ex.message}")
         } finally {
             lock.unlock()
         }
