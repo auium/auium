@@ -1,6 +1,7 @@
 package com.auium.driver
 
 import com.auium.element.Element
+import com.auium.element.ElementType
 import com.auium.element.Selector
 import com.auium.remote.MobileCommand
 import com.auium.remote.SelectorRequest
@@ -13,6 +14,11 @@ import java.util.concurrent.ConcurrentMap
  * 用于存储Session和Element信息
  */
 val wildcards: ConcurrentMap<Wildcard, String> by lazy { ConcurrentHashMap() }
+
+/**
+ * 全局启动
+ */
+val driver by lazy { Driver() }
 
 /**
  * 查找元素
@@ -48,9 +54,15 @@ fun Driver.source(): String {
 fun Selector.toRequest(): SelectorRequest {
     return when (val selector = this) {
         is Selector.Id -> SelectorRequest(selector.using, selector.id)
+        is Selector.Name -> SelectorRequest(selector.using, selector.name)
         is Selector.Type -> SelectorRequest(selector.using, selector.type)
         is Selector.XPath -> SelectorRequest(selector.using, selector.xpath)
         is Selector.Predicate -> SelectorRequest(selector.using, selector.predicate)
         is Selector.ClassChain -> SelectorRequest(selector.using, selector.classChain)
+        is Selector.NameContains -> SelectorRequest(selector.using, selector.nameContains.genClassChain())
     }
+}
+
+private fun String.genClassChain(): String {
+    return "**/${ElementType.Any.completeType}[`name CONTAINS[cd] \"${this}\"`]"
 }

@@ -16,6 +16,8 @@ interface IElement {
 
     fun location(): Point
 
+    fun center(): Point
+
     fun clear()
 
     fun sendKeys(keys: String)

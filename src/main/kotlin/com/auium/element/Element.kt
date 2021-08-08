@@ -18,17 +18,20 @@ class Element : IElement, CommandExecutionHelper() {
     private var rect: Rectangle? = null
 
     override fun tap() {
-        val location = location()
-        execute(MobileCommand.TAP, wildcards, location)
+        val center = center()
+        wildcards[Wildcard.ELEMENT_ID] = elementId
+        execute(MobileCommand.TAP, wildcards, center)
     }
 
     override fun text(): String {
         wildcards[Wildcard.ELEMENT_ID] = elementId
-        return ""
+        val response = execute(MobileCommand.GET_ELEMENT_TEXT, wildcards)
+        return "${response.value}"
     }
 
     override fun size(): Dimension {
         val rect = this.rect
+        wildcards[Wildcard.ELEMENT_ID] = elementId
         return if (rect == null) rect().size else rect.size
     }
 
@@ -44,6 +47,11 @@ class Element : IElement, CommandExecutionHelper() {
         val x = rect?.x ?: 0
         val y = rect?.y ?: 0
         return Point(x, y)
+    }
+
+    override fun center(): Point {
+        val rect = rect()
+        return Point(rect.centerX.toInt(), rect.centerY.toInt())
     }
 
     override fun clear() {

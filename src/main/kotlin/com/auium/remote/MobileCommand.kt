@@ -21,6 +21,7 @@ object MobileCommand {
     const val TERMINATE = "terminateApp"
     const val FIND_ELEMENT = "findElement"
     const val FIND_ELEMENTS = "findElements"
+    const val GET_ELEMENT_TEXT = "getText"
     const val GET_ELEMENT_RECT = "getElementRect"
     const val INPUT = "input"
     const val SEND = "sendKeys"
@@ -44,6 +45,7 @@ object MobileCommand {
         commands[FIND_ELEMENTS] = post("/session/:sessionId/elements")
         commands[TAP] = post("/session/:sessionId/wda/tap/0")
         commands[INPUT] = post("/session/:sessionId/wda/keys")
+        commands[GET_ELEMENT_TEXT] = get("/session/:sessionId/element/:uuid/text")
         commands[GET_ELEMENT_RECT] = get("/session/:sessionId/element/:uuid/rect")
         commands[SEND] = post("/session/:sessionId/element/:uuid/value")
         commands[CLEAR] = post("/session/:sessionId/element/:uuid/clear")

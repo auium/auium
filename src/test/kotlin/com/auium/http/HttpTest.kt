@@ -1,7 +1,5 @@
 package com.auium.http
 
-import com.auium.json.toObject
-import java.awt.SystemColor.info
 import kotlin.test.Test
 
 class HttpTest {
