@@ -12,6 +12,11 @@ interface IElement {
     fun tap()
 
     /**
+     * 通过坐标重复点击元素
+     */
+    fun repeatTap(count:Int = 1)
+
+    /**
      * 获取元素文本内容
      */
     fun text(): String

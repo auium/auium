@@ -26,6 +26,15 @@ class Element : IElement, CommandExecutionHelper() {
         execute(MobileCommand.TAP, wildcards, center)
     }
 
+    override fun repeatTap(count: Int) {
+        val center = center()
+        wildcards[Wildcard.ELEMENT_ID] = elementId
+        logger.debug { "tap: [${center.x}, ${center.y}]" }
+        repeat(count) {
+            execute(MobileCommand.TAP, wildcards, center)
+        }
+    }
+
     override fun text(): String {
         wildcards[Wildcard.ELEMENT_ID] = elementId
         val response = execute(MobileCommand.GET_ELEMENT_TEXT, wildcards)
