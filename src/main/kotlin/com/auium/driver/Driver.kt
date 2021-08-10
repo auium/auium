@@ -2,6 +2,7 @@ package com.auium.driver
 
 import com.auium.remote.*
 import mu.KotlinLogging
+import java.awt.Dimension
 import java.awt.Point
 
 class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelper() {
@@ -9,6 +10,7 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
     private val logger = KotlinLogging.logger {}
     var sessionId: String = ""
     val empty = mutableMapOf<String, String>()
+    val windowSize by lazy { windowSize() }
 
     init {
         webDriverAgentUrl = driverUrl
@@ -98,6 +100,14 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
      */
     fun tap(location: Point) {
         execute(MobileCommand.TAP, wildcards, location)
+    }
+
+    /**
+     * 获取当前屏幕大小
+     * @return Dimension
+     */
+    fun windowSize(): Dimension {
+        return execute(MobileCommand.GET_CURRENT_WINDOW_SIZE, wildcards).convert<Dimension>() ?: Dimension(375, 872)
     }
 
     /**

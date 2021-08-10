@@ -10,6 +10,7 @@ class PageTest {
     fun homePageTest() {
         page.category()?.tap()
         page.me()?.tap()
+        page.setting()?.text()
         page.setting()?.tap()
     }
 

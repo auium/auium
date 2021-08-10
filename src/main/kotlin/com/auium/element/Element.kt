@@ -6,6 +6,7 @@ import com.auium.remote.MobileCommand
 import com.auium.remote.Wildcard
 import com.auium.remote.convert
 import com.fasterxml.jackson.annotation.JsonProperty
+import mu.KotlinLogging
 import org.apache.commons.lang3.builder.ToStringBuilder
 import java.awt.Dimension
 import java.awt.Point
@@ -16,10 +17,12 @@ class Element : IElement, CommandExecutionHelper() {
     @JsonProperty("ELEMENT")
     var elementId: String? = null
     private var rect: Rectangle? = null
+    private val logger = KotlinLogging.logger {}
 
     override fun tap() {
         val center = center()
         wildcards[Wildcard.ELEMENT_ID] = elementId
+        logger.debug { "tap: [${center.x}, ${center.y}]" }
         execute(MobileCommand.TAP, wildcards, center)
     }
 

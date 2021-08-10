@@ -20,10 +20,15 @@ open class Page(val name: String, val describe: String = name) {
         while (element == null && count <= maxCount) {
             loading()
             element = driver.findElement(selector)
+            if (element == null) Thread.sleep(999)
             count++
         }
         val success = (element != null)
-        logger.info { "查找元素：$success 耗时：${timer.intervalPretty()}" }
+        if (success) {
+            logger.info { "Find element ✅ Find time consuming：${timer.intervalPretty()}" }
+        } else {
+            logger.info { "Find element ❌ Find time consuming：${timer.intervalPretty()}" }
+        }
         return element
     }
 
