@@ -55,15 +55,15 @@ object MobileCommand {
         commands[GET_CURRENT_WINDOW_SIZE] = get("/session/:sessionId/window/size")
     }
 
-    fun get(url: String): CommandInfo {
+    private fun get(url: String): CommandInfo {
         return CommandInfo(url, HttpMethod.GET)
     }
 
-    fun post(url: String): CommandInfo {
+    private fun post(url: String): CommandInfo {
         return CommandInfo(url, HttpMethod.POST)
     }
 
-    fun delete(url: String): CommandInfo {
+    private fun delete(url: String): CommandInfo {
         return CommandInfo(url, HttpMethod.DELETE)
     }
 

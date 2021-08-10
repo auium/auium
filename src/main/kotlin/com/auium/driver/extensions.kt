@@ -3,10 +3,7 @@ package com.auium.driver
 import com.auium.element.Element
 import com.auium.element.ElementType
 import com.auium.element.Selector
-import com.auium.remote.MobileCommand
-import com.auium.remote.SelectorRequest
-import com.auium.remote.Wildcard
-import com.auium.remote.convert
+import com.auium.remote.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
@@ -28,6 +25,15 @@ val driver by lazy { Driver() }
 fun Driver.findElement(selector: Selector): Element? {
     val element = execute(MobileCommand.FIND_ELEMENT, wildcards, selector.toRequest()).convert<Element>()
     return if (element?.elementId.isNullOrBlank()) null else element
+}
+
+/**
+ * 查找元素
+ * @param selector 定位信息
+ * @return Elements信息
+ */
+fun Driver.findElements(selector: Selector): List<Element> {
+    return execute(MobileCommand.FIND_ELEMENTS, wildcards, selector.toRequest()).convertElement()
 }
 
 /**
