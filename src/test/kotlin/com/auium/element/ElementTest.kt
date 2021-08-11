@@ -28,4 +28,9 @@ class ElementTest {
         driver.findElement(ClassChain("**/XCUIElementTypeTable[`visible == 1`]/XCUIElementTypeCell[`visible == 1`]"))?.tap()
     }
 
+    @Test
+    fun clickElementTest() {
+        driver.findElement(Selector.NameContains("Category"))?.click()
+    }
+
 }

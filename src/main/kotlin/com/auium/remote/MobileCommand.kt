@@ -24,6 +24,7 @@ object MobileCommand {
     const val FIND_ELEMENTS = "findElements"
     const val GET_ELEMENT_TEXT = "getText"
     const val GET_ELEMENT_RECT = "getElementRect"
+    const val ELEMENT_SELECT = "selectElement"
     const val INPUT = "input"
     const val SEND = "sendKeys"
     const val CLEAR = "clear"
@@ -50,6 +51,7 @@ object MobileCommand {
         commands[INPUT] = post("/session/:sessionId/wda/keys")
         commands[GET_ELEMENT_TEXT] = get("/session/:sessionId/element/:uuid/text")
         commands[GET_ELEMENT_RECT] = get("/session/:sessionId/element/:uuid/rect")
+        commands[ELEMENT_SELECT] = post("/session/:sessionId/element/:uuid/click")
         commands[SEND] = post("/session/:sessionId/element/:uuid/value")
         commands[CLEAR] = post("/session/:sessionId/element/:uuid/clear")
         commands[GET_CURRENT_WINDOW_SIZE] = get("/session/:sessionId/window/size")

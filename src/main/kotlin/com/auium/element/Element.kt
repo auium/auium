@@ -19,6 +19,11 @@ class Element : IElement, CommandExecutionHelper() {
     private var rect: Rectangle? = null
     private val logger = KotlinLogging.logger {}
 
+    override fun click() {
+        wildcards[Wildcard.ELEMENT_ID] = elementId
+        execute(MobileCommand.ELEMENT_SELECT, wildcards)
+    }
+
     override fun tap() {
         val center = center()
         wildcards[Wildcard.ELEMENT_ID] = elementId

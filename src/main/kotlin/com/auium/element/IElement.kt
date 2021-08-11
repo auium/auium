@@ -7,6 +7,11 @@ import java.awt.Rectangle
 interface IElement {
 
     /**
+     * 点击元素
+     */
+    fun click()
+
+    /**
      * 通过坐标点击元素
      */
     fun tap()
