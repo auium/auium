@@ -4,14 +4,19 @@ import kotlin.test.Test
 
 class PageTest {
 
-    private val page by lazy { HomePage() }
+    private val homePage by lazy { HomePage() }
+    private val settingPage by lazy { SettingPage() }
 
     @Test
     fun homePageTest() {
-        page.category()?.tap()
-        page.me()?.tap()
-        page.setting()?.text()
-        page.setting()?.tap()
+        homePage.category()?.tap()
+        homePage.me()?.tap()
+        homePage.setting()?.text()
+        homePage.setting()?.tap()
+        settingPage.address()?.tap()
+        settingPage.add()?.tap()
+        settingPage.firstName()?.sendKeys("Hello")
+        settingPage.lastName()?.sendKeys("World!")
     }
 
 }
