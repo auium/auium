@@ -1,6 +1,7 @@
 package com.auium.driver
 
 import com.auium.remote.MobileCommand
+import kotlin.math.ceil
 
 private val size = driver.windowSize
 private val width = size.width
@@ -12,6 +13,18 @@ private val height = size.height
  */
 fun Driver.swipeUp(wait: Int = 100) {
     swipe(width.div(2), height.div(2), width.div(2), 1, wait)
+}
+
+/**
+ * 向上滑动
+ * @param position 滑动未知
+ * @param wait 执行滑动时间
+ */
+fun Driver.swipeUp(position: Double = 0.2, wait: Int = 100) {
+    val startX = ceil(width.times(0.5)).toInt()
+    val startY = ceil(height.times(0.8)).toInt()
+    val endY = ceil(height.times(position)).toInt()
+    swipe(startX, startY, startX, endY, wait)
 }
 
 /**

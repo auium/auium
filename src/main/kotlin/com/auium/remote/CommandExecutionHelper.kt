@@ -51,10 +51,14 @@ open class CommandExecutionHelper {
         } finally {
             lock.unlock()
         }
-        if (httpResponse == null) throw RuntimeException("请求失败了！！！")
+        if (httpResponse == null) return buildRetry()
         val response = httpResponse.body.toObject<Response>()
         response.status = httpResponse.code
         return response
+    }
+
+    private fun buildRetry(): Response {
+        return Response("retry")
     }
 
 }
