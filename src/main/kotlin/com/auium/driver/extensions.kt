@@ -13,9 +13,14 @@ import java.util.concurrent.ConcurrentMap
 val wildcards: ConcurrentMap<Wildcard, String> by lazy { ConcurrentHashMap() }
 
 /**
+ * 读取WebDriverAgent服务地址
+ */
+var driverUrl: String = System.getProperty("driverUrl", "http://localhost:8100")
+
+/**
  * 全局启动
  */
-val driver by lazy { Driver() }
+val driver by lazy { Driver(driverUrl) }
 
 /**
  * 查找元素

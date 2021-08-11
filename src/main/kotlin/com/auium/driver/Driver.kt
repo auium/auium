@@ -13,10 +13,22 @@ class Driver(driverUrl: String = "http://localhost:8100") : CommandExecutionHelp
     val windowSize by lazy { windowSize() }
 
     init {
-        webDriverAgentUrl = driverUrl
+        webDriverAgentUrl = getUrl(driverUrl)
         logger.info("初始化驱动：$webDriverAgentUrl")
         if (locked()) unlock()
         status()
+    }
+
+    /**
+     * 处理Url
+     */
+    private fun getUrl(driverUrl: String): String {
+        var httpUrl = driverUrl
+        val sepIndex: Int = httpUrl.indexOf("://")
+        if (sepIndex < 0) {
+            httpUrl = "http://" + httpUrl.trim { it <= ' ' }
+        }
+        return httpUrl
     }
 
     /**
