@@ -7,6 +7,14 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
+/**
+ * 判断元素是否存在
+ * @return true or false
+ */
+fun Element?.exist(): Boolean {
+    return this != null
+}
+
 fun loading() {
     var count = 1
     val maxCount = 30
