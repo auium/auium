@@ -14,7 +14,7 @@
     <properties>
         <okhttp.version>4.9.1</okhttp.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <jackson.version>2.13.0-rc1</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <hutool.version>5.7.7</hutool.version>
         <testng.version>7.4.0</testng.version>
         <snakeyaml.version>1.29</snakeyaml.version>
