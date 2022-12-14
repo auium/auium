@@ -17,7 +17,7 @@
         <jackson.version>2.13.0-rc1</jackson.version>
         <hutool.version>5.7.7</hutool.version>
         <testng.version>7.4.0</testng.version>
-        <snakeyaml.version>1.29</snakeyaml.version>
+        <snakeyaml.version>1.32</snakeyaml.version>
         <kotlin-logging.version>2.0.10</kotlin-logging.version>
         <slf4j.version>1.7.32</slf4j.version>
         <log4j.version>2.14.1</log4j.version>
